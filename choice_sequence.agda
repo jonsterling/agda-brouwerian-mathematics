@@ -18,7 +18,12 @@ module ChoiceSequence (A : Set) where
       head : P α.head
       tail : Everywhere P α
 
+  data Somewhere (P : A → Set) (α : t) : Set where
+    now : P (t.head α) → Somewhere P α
+    later : Somewhere P (t.tail α) → Somewhere P α
+
   syntax Everywhere (λ x → P) α = ⟨ x ∈ α ⟩□ P
+  syntax Somewhere (λ x → P) α = ⟨ x ∈ α ⟩♢ P
 
   -- Cut off a finite prefix of a choice sequence
   _\\_ : t → ℕ.t → t
