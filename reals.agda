@@ -43,11 +43,11 @@ _~_ : t → t → Set
         CS².t.head (β >< γ [ i ]) =
           ⟨ head β , ⟨ head γ , i ⟩ ⟩
         CS².t.tail (β >< γ [ ℤ.⟨ i , inz ⟩ ]) =
-          tail β >< tail γ [ ℤ.⟨ i ℤ.+ (ℤ.+ 1) , admit ⟩ ]
+          tail β >< tail γ [ ℤ.⟨ i + (+ 1) , admit ⟩ ]
             where
-              postulate admit : _
+              open ℤ ; postulate admit : _
 
-    open CS² ; open Σ ; open ℚ
+    open CS² ; open ℚ
 
     `2 = ⟨ ℤ.+ 2 , ℤ.⟨ ℤ.+ 1 , (λ ()) ⟩ ⟩
 
