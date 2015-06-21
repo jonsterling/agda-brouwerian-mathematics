@@ -16,7 +16,7 @@ module ChoiceSequence (A : Set) where
     module α = t α
     field
       head : P α.head
-      tail : Everywhere P α
+      tail : Everywhere P α.tail
 
   data Somewhere (P : A → Set) (α : t) : Set where
     now : P (t.head α) → Somewhere P α
