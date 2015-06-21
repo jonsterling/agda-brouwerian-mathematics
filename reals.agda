@@ -6,7 +6,7 @@ open import pervasives
 import naturals as ℕ
 import integers as ℤ
 import rationals as ℚ
-open import choice_sequence
+open import choice-sequence
 
 module CS = ChoiceSequence ℚ.t
 

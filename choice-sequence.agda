@@ -1,4 +1,4 @@
-module choice_sequence where
+module choice-sequence where
 
 import naturals as ℕ
 
