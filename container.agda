@@ -1,12 +1,14 @@
-module container {ℓ} where
+{-# OPTIONS --type-in-type #-}
+
+module container where
 
 open import pervasives
 open import fibration
 
-container : Set (lsuc ℓ)
-container = 𝔉 {lsuc ℓ} {ℓ} (Set ℓ)
+container : Set
+container = 𝔉 Set
 
-make-container : (S : Set ℓ) (P : S → Set ℓ) → container
+make-container : (S : Set) (P : S → Set) → container
 make-container S P = S ↓ P
 
 syntax make-container S (λ s → P) = s ∶ S ◃ P
