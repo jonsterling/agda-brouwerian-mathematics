@@ -2,10 +2,6 @@ module pervasives where
 
 open import Agda.Primitive using (lzero; lsuc; _⊔_) public
 
-record Lift {a ℓ} (A : Set a) : Set (a ⊔ ℓ) where
-  constructor lift
-  field lower : A
-
 infixr 9 _∘_
 _∘_ : ∀ {a b c}
   → {A : Set a}

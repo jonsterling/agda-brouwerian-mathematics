@@ -1,26 +1,23 @@
 {-# OPTIONS --type-in-type #-}
 
-module neighborhoods where
-
-open import pervasives
 open import fibration
-open import container
-open import trees
 
-module _ (F : 𝔉 Set) where
-  private
-    module F = 𝔉 F
+module neighborhoods (F : 𝔉 Set) where
 
-  mutual
-    data approximation : Set₁ where
-      ∇ : approximation
-      _⌢_ : (s : approximation) → (refinement s → F.dom) → approximation
-    infixr 8 _⌢_
+  open import pervasives
+  open 𝔉 F
 
-    refinement : approximation → Set
-    refinement ∇ = Unit
-    refinement (s ⌢ σ) = Σ[ p ∶ refinement s ] F.map (σ p)
+  data approximation : Set
+  refinement : approximation → Set
+
+  data approximation where
+    ∇ : approximation
+    _⌢_ : (s : approximation) → (refinement s → dom) → approximation
+
+  infixr 8 _⌢_
+
+  refinement ∇ = Unit
+  refinement (s ⌢ σ) = Σ[ p ∶ refinement s ] map (σ p)
 
   _♮ : 𝔉 Set
   _♮ = approximation ↓ refinement
-

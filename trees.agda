@@ -1,25 +1,21 @@
 {-# OPTIONS --type-in-type #-}
 
-module trees where
-
-open import container
 open import fibration
 
-module _ (C : container) where
-  private
-    module C = 𝔉 C
+module trees (F : 𝔉 Set) where
+  open 𝔉 F
 
   record spread : Set where
     coinductive
     field
-      head : C.dom
-      subtrees : C.map head → spread
+      head : dom
+      subtrees : map head → spread
 
   record fan : Set where
     inductive
     field
-      head : C.dom
-      subtrees : C.map head → fan
+      head : dom
+      subtrees : map head → fan
 
   module notation where
     μ⟨_⟩ : Set
