@@ -13,6 +13,7 @@ module trees (F : 𝔉 Set) where
 
   record fan : Set where
     inductive
+    constructor _∷_
     field
       head : dom
       subtrees : map head → fan
