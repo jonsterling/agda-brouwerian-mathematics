@@ -22,23 +22,22 @@ module neighborhoods (F : 𝔉 Set) where
   refinement ⟨⟩ = Unit
   refinement (s ⌢ σ) = Σ[ p ∶ refinement s ] map (σ p)
 
-  mutual
-    data append : approximation → approximation → approximation → Set where
-      ⟨⟩ : ∀ {u} → append u ⟨⟩ u
-      snoc : ∀ {u v uv σ} (D : append u v uv) → append u (v ⌢ σ) (uv ⌢ σ ∘ strengthen-refinement D)
-
-    strengthen-refinement : ∀ {u v uv} → append u v uv → refinement uv → refinement v
-    strengthen-refinement ⟨⟩ _ = ⟨⟩
-    strengthen-refinement (snoc D) ⟨ r , m ⟩ = ⟨ _ , m ⟩
-
-  compute-append : (u v : approximation) → Σ[ w ∶ approximation ] append u v w
-  compute-append u ⟨⟩ = ⟨ _ , ⟨⟩ ⟩
-  compute-append u (v ⌢ x) = ⟨ _ , snoc (Σ.snd D) ⟩
-    where
-      D = compute-append u v
 
   _⊕_ : approximation → approximation → approximation
-  u ⊕ v = Σ.fst (compute-append u v)
+  u ⊕ v = Σ.fst (compute u v)
+    where
+      mutual
+        data R : approximation → approximation → approximation → Set where
+          ⟨⟩ : ∀ {u} → R u ⟨⟩ u
+          snoc : ∀ {u v u⊕v σ} (D : R u v u⊕v) → R u (v ⌢ σ) (u⊕v ⌢ σ ∘ str D)
+
+        str : ∀ {u v u⊕v} → R u v u⊕v → refinement u⊕v → refinement v
+        str ⟨⟩ _ = ⟨⟩
+        str (snoc D) ⟨ r , m ⟩ = ⟨ _ , m ⟩
+
+      compute : ∀ u v → Σ[ w ∶ approximation ] R u v w
+      compute u ⟨⟩ = ⟨ _ , ⟨⟩ ⟩
+      compute u (v ⌢ x) = ⟨ _ , snoc (Σ.snd (compute u v)) ⟩
 
   _♮ : 𝔉 Set
   _♮ = approximation ↓ refinement
