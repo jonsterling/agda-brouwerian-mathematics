@@ -25,15 +25,16 @@ module bars (F : 𝔉 Set) where
       → .(∀ α → Σ[ n ∶ ℕ ] B bars (u ⊕ prefix α n))
       → A (u ⊕ ⟨⟩)
 
-  postulate
-    strengthen-bar :
-      (B : approximation → Set)
-      {u : approximation}
-      {σ : refinement u → F.dom}
-      (α : path)
-      (n : ℕ)
-        → B bars (u ⊕ prefix α n)
-        → B bars ((u ⌢ σ) ⊕ prefix α n)
+  private
+    postulate
+      strengthen-bar :
+        (B : approximation → Set)
+        {u : approximation}
+        {σ : refinement u → F.dom}
+        (α : path)
+        (n : ℕ)
+          → B bars (u ⊕ prefix α n)
+          → B bars ((u ⌢ σ) ⊕ prefix α n)
 
   {-# NO_TERMINATION_CHECK #-}
   BI : bar-induction-type
