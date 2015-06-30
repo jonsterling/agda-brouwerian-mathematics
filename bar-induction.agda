@@ -20,7 +20,7 @@ module bar-induction (F : 𝔉 Set) where
     {A B : approximation → Set}
       → (∀ s → B s + (B s → Void)) -- B is a decidable bar
       → (∀ s → B s → A s)
-      → (∀ s → (∀ σ → A (s ⌢ σ)) → A s) -- A is inductive
+      → (∀ s → (∀ σ → A (s ⌢ σ)) → A s) -- A is hereditary
       → (u : approximation)
       → .(∀ α → Σ[ n ∶ ℕ ] B bars (u ⊕ prefix α n))
       → A (u ⊕ ⟨⟩)
