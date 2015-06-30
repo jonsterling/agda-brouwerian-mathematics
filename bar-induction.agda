@@ -13,7 +13,7 @@ module bar-induction (F : 𝔉 Set) where
     module F = 𝔉 F
 
   _bars_ : (B : approximation → Set) (s : approximation) → Set
-  _bars_ B[_] s = μ⟨ U ∶ (approximation → Set) ↓ B[ s ] + ((σ : refinement s → F.dom) → B[ s ⌢ σ ]) ⟩
+  _bars_ B[_] s = μ⟨ U[_] ∶ (approximation → Set) ↓ B[ s ] + ((σ : refinement s → F.dom) → U[ s ⌢ σ ]) ⟩
 
   bar-induction-type : Set
   bar-induction-type =
