@@ -27,7 +27,7 @@ module bar-induction (F : 𝔉 Set) where
 
   private
     postulate
-      strengthen-bar :
+      weaken-bar :
         (B : approximation → Set)
         {u : approximation}
         {σ : refinement u → F.dom}
@@ -44,4 +44,4 @@ module bar-induction (F : 𝔉 Set) where
     A-ind u λ σ →
       bar-induction B-dec B⊃A A-ind (u ⌢ σ) λ α →
         let ⟨ n , bars ⟩ = is-bar α in
-          ⟨ n , strengthen-bar B α n bars ⟩
+          ⟨ n , weaken-bar B α n bars ⟩
