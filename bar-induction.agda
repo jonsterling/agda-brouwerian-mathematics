@@ -2,7 +2,7 @@
 
 open import fibration
 
-module bars (F : 𝔉 Set) where
+module bar-induction (F : 𝔉 Set) where
   open import pervasives
   open import neighborhoods using (_♮; _⌢_; ⟨⟩)
   open neighborhoods F hiding (_♮; _⌢_; ⟨⟩)
@@ -37,11 +37,11 @@ module bars (F : 𝔉 Set) where
           → B bars ((u ⌢ σ) ⊕ prefix α n)
 
   {-# NO_TERMINATION_CHECK #-}
-  BI : bar-induction-type
-  BI {B = B} B-dec B⊃A A-ind u is-bar with B-dec u
+  bar-induction : bar-induction-type
+  bar-induction {B = B} B-dec B⊃A A-ind u is-bar with B-dec u
   ... | inl p = B⊃A u p
   ... | inr _ =
     A-ind u λ σ →
-      BI B-dec B⊃A A-ind (u ⌢ σ) λ α →
+      bar-induction B-dec B⊃A A-ind (u ⌢ σ) λ α →
         let ⟨ n , bars ⟩ = is-bar α in
           ⟨ n , strengthen-bar B α n bars ⟩
